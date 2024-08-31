@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Authenticate</title>
+        <script src='https://www.google.com/recaptcha/api.js'></script>
+        <script>
+            function enableBtn(){
+                document.getElementById("submit_details").disabled = false;
+            }
+        </script>
+       
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script> 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.js" integrity="sha256-2JRzNxMJiS0aHOJjG+liqsEOuBb6++9cY4dSOyiijX4=" crossorigin="anonymous"></script>
+        <style>
+               
+            .tab {
+                overflow: hidden;
+                border: 1px solid #ccc;
+                background-color: #f1f1f1;
+              }
+              
+              /* Style the buttons that are used to open the tab content */
+              .tab button {
+                background-color: green;
+                border: black;
+                outline: none;
+                cursor: pointer;
+                padding: 14px 16px;
+                transition: 0.3s;
+              }
+              
+              /* Change background color of buttons on hover */
+              .tab button:hover {
+                background-color: green;
+              }
+              
+              /* Create an active/current tablink class */
+              .tab button.active {
+                background-color: #ccc;
+              }
+              
+              /* Style the tab content */
+              .tabcontent {
+                display: none;
+                padding: 6px 12px;
+                border: 1px solid #ccc;
+                border-top: none;
+              }
+    
+
+            /*Bootstrap Calendar*/
+            .datepicker {
+                border-radius: 0;
+                padding: 3;
+            }       
+            .datepicker-days table thead, .datepicker-days table tbody, .datepicker-days table tfoot {
+                 padding: 10px;
+                display: list-item;
+            }
+            .datepicker-days table thead, .datepicker-months table thead, .datepicker-years table thead, .datepicker-decades table thead, .datepicker-centuries table thead {
+                background: #3546b3;
+                color: #ffffff;
+                border-radius: 0;
+            }
+            .datepicker-days table thead tr:nth-child(2n+0) td, .datepicker-days table thead tr:nth-child(2n+0) th {
+                border-radius: 3px;
+            }
+            .datepicker-days table thead tr:nth-child(3n+0) {
+                text-transform: uppercase;
+                font-weight: 300 !important;
+                font-size: 12px;
+                color: rgba(255, 255, 255, 0.7);
+            }
+            .table-condensed > tbody > tr > td, .table-condensed > tbody > tr > th, .table-condensed > tfoot > tr > td, .table-condensed > tfoot > tr > th, .table-condensed > thead > tr > td, .table-condensed > thead > tr > th {
+                padding: 11px 13px;
+            }
+            .datepicker-months table thead td, .datepicker-months table thead th, .datepicker-years table thead td, .datepicker-years table thead th, .datepicker-decades table thead td, .datepicker-decades table thead th, .datepicker-centuries table thead td, .datepicker-centuries table thead th {
+                border-radius: 0;
+            }
+            .datepicker td, .datepicker th {
+                border-radius: 50%;
+                padding: 0 12px;
+                }
+            .datepicker-days table thead, .datepicker-months table thead, .datepicker-years table thead, .datepicker-decades table thead, .datepicker-centuries table thead {
+                background: #3546b3;
+                color: #ffffff;
+                border-radius: 0;
+            }
+            .datepicker table tr td.active, .datepicker table tr td.active:hover, .datepicker table tr td.active.disabled, .datepicker table tr td.active.disabled:hover {
+                background-image: none;
+            }
+            .datepicker .prev, .datepicker .next {
+                color: rgba(255, 255, 255, 0.5);
+                transition: 0.3s;
+                width: 37px;
+                height: 37px;
+            }
+            .datepicker .prev:hover, .datepicker .next:hover {
+                background: transparent;
+                color: rgba(255, 255, 255, 0.99);
+                font-size: 21px;
+            }
+            .datepicker .datepicker-switch {
+                font-size: 24px;
+                font-weight: 400;
+                transition: 0.3s;
+            }
+            .datepicker .datepicker-switch:hover {
+                color: rgba(255, 255, 255, 0.7);
+                background: transparent;
+            }
+            .datepicker table tr td span {
+                border-radius: 2px;
+                margin: 3%;
+                width: 27%;
+            }
+            .datepicker table tr td span.active, .datepicker table tr td span.active:hover, .datepicker table tr td span.active.disabled, .datepicker table tr td span.active.disabled:hover {
+            background-color: #3546b3;
+            background-image: none;
+            }
+            .dropdown-menu {
+                border: 1px solid rgba(0,0,0,.1);
+                box-shadow: 0 6px 12px rgba(0,0,0,.175);
+            }
+            .datepicker-dropdown.datepicker-orient-top:before {
+                border-top: 7px solid rgba(0,0,0,.1);
+            }
+        </style>    
+    </head>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+   
+
+    <body>
+    
+     
+        
+        <%if(currentUser){%>
+        
+            <%=currentUser.username%>
+            <a href="/logout">Log Out</a>
+            
+        <%}%>
+
+        <div class="card container" style="width:560px; margin-top:20px;">
+
+            <div class="p-3 mb-2 bg-dark text-white center" style="margin-bottom:0px;">Register</div>
+            <div class="tab">
+                <button class="tablinks" onclick="$('#register_government_official').hide(); $('#register').show(); $('#login').hide()"> &nbsp; &nbsp; &nbsp; &nbsp; Register as Bidder &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</button>
+                <button class="tablinks" style="background-color:#345eeb" onclick="$('#register').hide(); $('#register_government_official').show(); $('#login').hide()"> &nbsp; &nbsp; Register as Government Officer</button>
+                <br></br>
+              </div>
+            
+            <form id="register" class="tabcontent" action="/signupbidder" method="POST" style="display: none">
+                <div style="color: red; size: 10px;"> Personal Details<br></br></div>
+                
+
+                    
+                <label>Email</label>
+                <input class="form-control" name="username" style="margin-bottom:20px" placeholder="abc@example.com">
+
+                <label>Contact Number</label>
+                <input class="form-control" name="contactnumber" type="tel" style="margin-bottom:20px" placeholder="Enter Mobile Number">
+                
+                <script>
+                    // https://github.com/uxsolutions/bootstrap-datepicker
+                    $('.dateselect').datepicker({
+                    format: 'mm/dd/yyyy',
+                    // startDate: '-3d'
+                    });
+                    // $('.dateselect2').datepicker({
+                    //     format: 'mm/dd/yyyy',
+                    //     autoclose:true,
+                    //     todayHighlidht: true,
+                    // }).on("hide", function(){
+                    //   if ($)
+                    // }
+               </script>
+
+                <label class="mr-sm-2">Date of Birth <br></br>
+                <input class="form-control" style="margin-bottom:20px; margin-left:20px" placeholder="DD MM YYYY" data-provide="datepicker" required="required"/>
+                </label> <br></br>
+
+                <label class="mr-sm-2" for ="region">Choose Region</label>
+                    <select class="custom-select mr-sm-2" style="margin-bottom:20px" name="region" id="region">
+                        <option value="North India">North India</option>
+                        <option value="South India">South India</option>
+                        <option value="West India">West India</option>
+                        <option value="East India">East India</option>
+                    </select>
+
+
+                <label>Password</label>
+                <input class="form-control" name="password" type="password" style="margin-bottom:20px" placeholder="Keep Strong Passwords">
+
+                <label>Confirm Password</label>
+                <input class="form-control" type="password" style="margin-bottom:20px" placeholder="Retype your password"> <br></br>
+                <script>console.log("testing captcha");</script>
+
+                <div style="color: blue; size: 10px;"> Company Details<br></br></div>
+
+                <label>Company Name / License Holder Name</label>
+                <input class="form-control" name="companyname" type="text" style="margin-bottom:20px" placeholder="Enter your company name">
+
+                <label> Registeration Number</label>
+                <input class="form-control" name="registerationnumber" type="text" style="margin-bottom:20px" placeholder="Enter your registeration number">
+                
+                <label class="mr-sm-2" for ="biddertype">Enter type of bidder</label>
+                    <select class="custom-select mr-sm-2" style="margin-bottom:20px" name="biddertype" id="biddertype">
+                        <option value="Indian">Indian</option>
+                        <option value="Foreigner">Foreigner</option>
+                    </select>
+
+                <label>Pan Number</label>
+                <input class="form-control" name="pannumber" type="text" style="margin-bottom:20px" placeholder="Enter your pan number"> <br></br> 
+
+
+                <div class="g-recaptcha" style="display:flex; justify-content:center; margin-left: 16em; padding: 0 17em 2em 0" data-type="image" data-sitekey="6LejFMIkAAAAAOEOyVHbB9FCTot_a7NbqUNsdawL" data-callback="enableBtn"></div>
+
+                <script>console.log("testing captcha");</script>
+               
+
+                <center>
+                    <input id="submit_details" style="margin-bottom:5px;" type="submit" class="btn btn-success" value="Register" disabled><br>
+                    <font color="blue" size=1 style="cursor:pointer" onclick="$('#register').hide(); $('#login').show();">Already a member? Sign In</font>
+                </center>
+
+            </form>
+
+            <form id="register_government_official" class="tabcontent" action="/signupgovernmentofficial" method="POST" style="display: none">
+
+                <label>Email</label>
+                <input class="form-control" name="username" style="margin-bottom:20px" placeholder="abc@example.com">
+
+                <label>Contact Number</label>
+                <input class="form-control" name="contactnumber" type="tel" style="margin-bottom:20px" placeholder="Enter Mobile Number">
+
+                <label class="mr-sm-2" for ="region">Choose Region</label>
+                    <select class="custom-select mr-sm-2" style="margin-bottom:20px" name="region" id="region">
+                        <option value="North India">North India</option>
+                        <option value="South India">South India</option>
+                        <option value="West India">West India</option>
+                        <option value="East India">East India</option>
+                    </select>
+
+                <label>Government ID Number</label>
+                <input class="form-control" name="governmentidnumber"  type="text" style="margin-bottom:20px" placeholder="Enter your Gov ID Number">
+
+                <label>Password</label>
+                <input class="form-control" name="password" type="password" style="margin-bottom:20px" placeholder="Keep Strong Passwords">
+
+                <label>Confirm Password</label>
+                <input class="form-control" type="password" style="margin-bottom:20px" placeholder="Retype your password"> <br> </br>
+                <script>console.log("testing captcha");</script>
+
+                <script>
+                    function enableLoginBtnGovernmentOfficial(){
+                        document.getElementById("submit_details_governmentofficiallogin").disabled = false;
+                    }
+                </script>
+                <div class="g-recaptcha" style="display:flex; justify-content:center; margin-left: 16em; padding: 0 17em 2em 0" data-type="image" data-sitekey="6LejFMIkAAAAAOEOyVHbB9FCTot_a7NbqUNsdawL" data-callback="enableLoginBtnGovernmentOfficial"></div>
+
+                <script>console.log("testing captcha");</script>
+               
+
+                <center>
+                    <input id="submit_details_governmentofficiallogin" style="margin-bottom:5px;" type="submit" class="btn btn-success" value="Register" disabled><br>
+                    <font color="blue" size=1 style="cursor:pointer" onclick="$('#register_government_official').hide(); $('#login').show();">Already a member? Sign In</font>
+                </center>
+
+            </form>
+
+            <form id="login" action="/signin" method="POST">
+            <div class="p-3 mb-2 bg-dark text-white">Login</div>
+
+                <label>Email</label>
+                <input class="form-control" name="username" style="margin-bottom:20px" placeholder="abc@example.com">
+
+                <label>Password</label>
+                <input class="form-control" name="password" type="password" style="margin-bottom:20px" placeholder="Enter Password"> <br></br>
+                <script>
+                    function enableLoginBtn(){
+                        document.getElementById("submit_details_login").disabled = false;
+                    }
+                </script>
+                <div class="g-recaptcha" style="display:flex; justify-content:center; margin-left: 17em; padding: 0 17em 2em 0" data-type="image" data-sitekey="6LejFMIkAAAAAOEOyVHbB9FCTot_a7NbqUNsdawL" data-callback="enableLoginBtn"></div>
+                <br></br>
+
+                <center>
+                    <input id="submit_details_login" style="margin-bottom:5px;"  type="submit" class="btn btn-success" value="Log In" disabled><br>
+                    <font color="blue" size=1 style="cursor:pointer" onclick="$('#login').hide(); $('#register').show();">Not a member yet? Register here</font>
+                </center>
+
+            </form>
+
+        </div>
+        
+
+    </body>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.34/dist/web3.js"></script>
+    <script type="text/javascript" language="javascript" src="index.js"></script>
+    <script type="text/javascript" language="javascript" src="loadEthereum.js"></script>
+    <script type="text/javascript" language="javascript" src="confirmType.js"></script>
+    <script type="text/javascript" language="javascript" src="truffle-contract.js"></script>
+    <script src="/contract.js"></script>
+
+</html>

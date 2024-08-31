@@ -1,0 +1,343 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authenticate</title>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <script>
+      function enableloginBtn(){
+          document.getElementById("submit_details_login").disabled = false;
+      }
+    </script>
+    <script src="https://kit.fontawesome.com/c0078485ae.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type"text/css" href="mian.css">
+    <style>
+        /*6B5CFF*/
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;400;700&display=swap');
+
+:root {
+    --mainColor: #6B5CFF;
+
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+
+}
+
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+
+}
+
+
+
+.wave {
+    position: fixed;
+    height: 100%;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 7rem;
+    padding: 0 2rem;
+}
+
+.img {
+    
+    justify-content: flex-end;
+    align-items: left;
+}
+
+.img img {
+    position:absolute;
+    top:630px;
+    width: 300px;
+    z-index: 2;
+    right:1500px;
+
+
+}
+
+.login-container {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+form {
+    width: 360px;
+    text-transform: uppercase;
+}
+
+.avatar {
+    width: 100px;
+}
+
+form h2 {
+    font-size: 2.9rem;
+    text-transform: uppercase;
+    margin: 15px 0;
+    color: #333;
+}
+
+.input-div {
+    position: relative;
+    display: grid;
+    grid-template-columns: 7% 93%;
+    margin: 25px 0;
+    padding: 5px 0;
+    border-bottom: 2px so lid #d9d9d9;
+    text-decoration: none;
+    outline: none;
+
+
+}
+
+.input-div:after,
+.input-div:before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    width: 0;
+    height: 2px;
+    background-color: var(--mainColor);
+    transition: .3s;
+    outline: none;
+}
+
+.input-div:after {
+    right: 50%;
+}
+
+.input-div:before {
+    left: 50%;
+}
+
+.input-div.focus .i i {
+    color: var(--mainColor);
+}
+
+.input-div.focus div h5 {
+    top: -5px;
+    font-size: 10px;
+
+}
+
+.input-div.focus:after,
+.input-div.focus:before {
+    width: 50%;
+
+}
+
+.input-div.one {
+    margin-top: 0;
+}
+
+.input-div.two {
+    margin-bottom: 4px;
+}
+
+.i {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.i i {
+    color: #d9d9d9;
+    transition: .3s;
+}
+
+.input-div>div {
+    position: relative;
+    height: 45px;
+}
+
+.input-div>div h5 {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    font-size: 18px;
+    transition: .3s;
+}
+
+
+.input {
+    position: absolute;
+    outline: 0;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border: none;
+    background: none;
+    padding: 0.5rem 0.7rem;
+    font-size: 1.2rem;
+    color: #555;
+    font-family: 'Source Sans Pro', sans-serif;
+
+}
+
+a {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color: #999;
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    transition: .3s;
+    margin: 20px;
+}
+
+a:hover {
+    color: var(--mainColor);
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    height: 40px;
+    border-radius: 25px;
+    text-transform: uppercase;
+    background-color: var(--mainColor);
+    color: white;
+    border: none;
+    letter-spacing: 1px;
+    margin-top: 20px;
+    transition: .5s;
+}
+
+.btn:hover {
+    background: linear-gradient(to left bottom, #e524ee, #c714ee, #a509ed, #7c0aec, #4112eb);
+}
+
+@media screen and (max-width: 1000px) {
+    form {
+        width: 290px;
+    }
+
+    .login-container h2 {
+        font-size: 2.4rem;
+        margin: 8px 0;
+    }
+
+    .img img {
+        width: 400px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    body {
+        background-color: var(--mainColor);
+    }
+
+    .container {
+        grid-template-columns: 1fr;
+    }
+
+    .img {
+        display: none;
+    }
+
+    .wave {
+        display: none;
+    }
+
+    .login-container {
+        justify-content: center;
+        color: var(--mainColor);
+    }
+
+    .form-login {
+        top:-30px;
+        padding: 40px;
+        background-color: #fff;
+        width: 420px;
+        border-radius: 8px;
+        box-shadow: 3px 3px 15px rgba(88, 34, 160, 0.2);
+    }
+}
+    </style>
+    <script>
+       function addcl() {
+    let parent = this.parentNode.parentNode;
+    parent.classList.add("focus");
+}
+
+function remcl() {
+    let parent = this.parentNode.parentNode;
+    if (this.value == "") {
+        parent.classList.remove("focus");
+    }
+}
+
+    </script>
+</head>
+
+<body>
+    <img src="https://i.ibb.co/XWdPc2X/wave-01.png" alt="" class="wave">
+    <div class="container">
+        <div class="img">
+            <img src="https://cdn-icons-png.flaticon.com/512/2104/2104152.png" alt="">
+        </div>
+        <div class="login-container">
+            <form id = "login" class="form-login" action="/signin" method="POST">
+                <img class="avatar" src="https://i.ibb.co/H4f3Hkv/profile.png" alt="">
+                <h2>Welcome</h2>
+                <div class="input-div one">
+                    <div class="i">
+                        <i class="fas fa-user"> </i>
+                    </div>
+                    <div>
+                        
+                        <input class="input" name="username" type="text" style="color:black"; placeholder="Username">
+                    </div>
+                </div>
+                <div class="input-div pass">
+                    <div class="i">
+                        <i class="fas fa-lock"> </i>
+                    </div>
+                    <div class="div">
+                        <input class="input" name="password" type="password" style="color:black"; placeholder="Password">
+                    </div>
+                    <div class="g-recaptcha" style="display:flex; justify-content:center; margin-left: 10.7em; margin-top:30px; margin-bottom:35px; width:20px;" data-type="image" data-sitekey="6LejFMIkAAAAAOEOyVHbB9FCTot_a7NbqUNsdawL" data-callback="enableloginBtn" required="required"></div>
+                </div>
+                <script>
+                    function enableLoginBtn(){
+                        document.getElementById("submit_details_login").disabled = false;
+                    }
+                </script>
+                <center>
+                    <input id="submit_details_login" style="margin-bottom:5px; cursor:pointer"  type="submit" class="btn btn-success" value="Log In"><br>
+                    <font color="blue" size=4 >Not a member yet? Register here ↓ </font>
+                    <br></br>
+                </center>
+
+                <input type="button" class="btn" href="#" style="cursor:pointer" onclick="chigger();" value="Register">
+                
+          <script>
+              function chigger(){
+                  window.location="/signup";
+              }
+          </script>
+            </form>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.34/dist/web3.js"></script>
+    <script type="text/javascript" language="javascript" src="loadEthereum.js"></script>
+    <script type="text/javascript" language="javascript" src="confirmType.js"></script>
+    <script type="text/javascript" language="javascript" src="form2.js"></script>
+    <script type="text/javascript" language="javascript" src="truffle-contract.js"></script>
+    <script src="/contract.js"></script>
+</body>

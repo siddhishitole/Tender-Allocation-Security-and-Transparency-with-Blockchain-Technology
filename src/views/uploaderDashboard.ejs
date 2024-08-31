@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Uploader</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.js" integrity="sha256-2JRzNxMJiS0aHOJjG+liqsEOuBb6++9cY4dSOyiijX4=" crossorigin="anonymous"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <style>
+        
+        .wrapper {
+          max-width: 560px;
+          margin: 100px auto;
+        }
+        label {
+          position: relative;
+          display: block;
+        }
+        label > input {
+          position: relative;
+          background-color: transparent;
+          border: none;
+          border-bottom: 1px solid #9e9e9e;
+          border-radius: 0;
+          outline: none;
+          height: 45px;
+          width: 100%;
+          font-size: 16px;
+          margin: 0 0 30px 0;
+          padding: 0;
+          box-shadow: none;
+          box-sizing: content-box;
+          transition: all .3s;
+        }
+        label > input:valid + span {
+          transform: translateY(-25px) scale(0.8);
+          transform-origin: 0;
+        }
+        label > input:valid {
+          border-bottom: 1px solid #3F51B5;
+          box-shadow: 0 1px 0 0 #3F51B5;
+        }
+        label > span {
+          color: #9e9e9e;
+          position: absolute;
+          top: 0;
+          left: 0;
+          font-size: 16px;
+          cursor: text;
+          transition: .2s ease-out;
+        }
+        label > input:focus + span {
+          transform: translateY(-25px) scale(0.8);
+          transform-origin: 0;
+          color: #3F51B5;
+        }
+        label > input:focus {
+          border-bottom: 1px solid #3F51B5;
+          box-shadow: 0 1px 0 0 #3F51B5;
+        }
+        
+        
+        
+        
+        /*Bootstrap Calendar*/
+        .datepicker {
+            border-radius: 0;
+            padding: 0;
+        }
+        .datepicker-days table thead, .datepicker-days table tbody, .datepicker-days table tfoot {
+            padding: 10px;
+            display: list-item;
+        }
+        .datepicker-days table thead, .datepicker-months table thead, .datepicker-years table thead, .datepicker-decades table thead, .datepicker-centuries table thead {
+            background: #3546b3;
+            color: #ffffff;
+            border-radius: 0;
+        }
+        .datepicker-days table thead tr:nth-child(2n+0) td, .datepicker-days table thead tr:nth-child(2n+0) th {
+            border-radius: 3px;
+        }
+        .datepicker-days table thead tr:nth-child(3n+0) {
+            text-transform: uppercase;
+            font-weight: 300 !important;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .table-condensed > tbody > tr > td, .table-condensed > tbody > tr > th, .table-condensed > tfoot > tr > td, .table-condensed > tfoot > tr > th, .table-condensed > thead > tr > td, .table-condensed > thead > tr > th {
+            padding: 11px 13px;
+        }
+        .datepicker-months table thead td, .datepicker-months table thead th, .datepicker-years table thead td, .datepicker-years table thead th, .datepicker-decades table thead td, .datepicker-decades table thead th, .datepicker-centuries table thead td, .datepicker-centuries table thead th {
+            border-radius: 0;
+        }
+        .datepicker td, .datepicker th {
+            border-radius: 50%;
+            padding: 0 12px;
+        }
+        .datepicker-days table thead, .datepicker-months table thead, .datepicker-years table thead, .datepicker-decades table thead, .datepicker-centuries table thead {
+            background: #3546b3;
+            color: #ffffff;
+            border-radius: 0;
+        }
+        .datepicker table tr td.active, .datepicker table tr td.active:hover, .datepicker table tr td.active.disabled, .datepicker table tr td.active.disabled:hover {
+            background-image: none;
+        }
+        .datepicker .prev, .datepicker .next {
+            color: rgba(255, 255, 255, 0.5);
+            transition: 0.3s;
+            width: 37px;
+            height: 37px;
+        }
+        .datepicker .prev:hover, .datepicker .next:hover {
+            background: transparent;
+            color: rgba(255, 255, 255, 0.99);
+            font-size: 21px;
+        }
+        .datepicker .datepicker-switch {
+            font-size: 24px;
+            font-weight: 400;
+            transition: 0.3s;
+        }
+        .datepicker .datepicker-switch:hover {
+            color: rgba(255, 255, 255, 0.7);
+            background: transparent;
+        }
+        .datepicker table tr td span {
+            border-radius: 2px;
+            margin: 3%;
+            width: 27%;
+        }
+        .datepicker table tr td span.active, .datepicker table tr td span.active:hover, .datepicker table tr td span.active.disabled, .datepicker table tr td span.active.disabled:hover {
+          background-color: #3546b3;
+          background-image: none;
+        }
+        .dropdown-menu {
+            border: 1px solid rgba(0,0,0,.1);
+            box-shadow: 0 6px 12px rgba(0,0,0,.175);
+        }
+        .datepicker-dropdown.datepicker-orient-top:before {
+            border-top: 7px solid rgba(0,0,0,.1);
+        }
+    </style>
+
+</head>
+
+<style>
+
+    #loading {
+    border: 2px solid #f3f3f3; /* Light grey */
+    border-top: 2px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
+
+/* ---------------Animation---------------- */
+
+        .slit-in-vertical {
+            -webkit-animation: slit-in-vertical 0.45s ease-out both;
+                    animation: slit-in-vertical 0.45s ease-out both;
+        }
+
+        @-webkit-keyframes slit-in-vertical {
+        0% {
+            -webkit-transform: translateZ(-800px) rotateY(90deg);
+                    transform: translateZ(-800px) rotateY(90deg);
+            opacity: 0;
+        }
+        54% {
+            -webkit-transform: translateZ(-160px) rotateY(87deg);
+                    transform: translateZ(-160px) rotateY(87deg);
+            opacity: 1;
+        }
+        100% {
+            -webkit-transform: translateZ(0) rotateY(0);
+                    transform: translateZ(0) rotateY(0);
+        }
+        }
+        @keyframes slit-in-vertical {
+        0% {
+            -webkit-transform: translateZ(-800px) rotateY(90deg);
+                    transform: translateZ(-800px) rotateY(90deg);
+            opacity: 0;
+        }
+        54% {
+            -webkit-transform: translateZ(-160px) rotateY(87deg);
+                    transform: translateZ(-160px) rotateY(87deg);
+            opacity: 1;
+        }
+        100% {
+            -webkit-transform: translateZ(0) rotateY(0);
+                    transform: translateZ(0) rotateY(0);
+        }
+        }
+
+        /*---------------#region Alert--------------- */
+
+        #dialogoverlay{
+        display: none;
+        opacity: .8;
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        background: #707070;
+        width: 100%;
+        z-index: 10;
+        }
+
+        #dialogbox{
+        display: none;
+        position: absolute;
+        background: rgb(0, 47, 43);
+        border-radius:7px; 
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.575);
+        transition: 0.3s;
+        width: 40%;
+        z-index: 10;
+        top:0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        }
+
+        #dialogbox:hover {
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.911);
+        }
+
+        .container {
+        padding: 2px 16px;
+        }
+
+        .pure-material-button-contained {
+        position: relative;
+        display: inline-block;
+        box-sizing: border-box;
+        border: none;
+        border-radius: 4px;
+        padding: 0 16px;
+        min-width: 64px;
+        height: 36px;
+        vertical-align: middle;
+        text-align: center;
+        text-overflow: ellipsis;
+        text-transform: uppercase;
+        color: rgb(var(--pure-material-onprimary-rgb, 255, 255, 255));
+        background-color: rgb(var(--pure-material-primary-rgb, 0, 77, 70));
+        /* background-color: rgb(1, 47, 61) */
+        box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+        font-family: var(--pure-material-font, "Roboto", "Segoe UI", BlinkMacSystemFont, system-ui, -apple-system);
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 36px;
+        overflow: hidden;
+        outline: none;
+        cursor: pointer;
+        transition: box-shadow 0.2s;
+        }
+
+        .pure-material-button-contained::-moz-focus-inner {
+        border: none;
+        }
+
+        /* ---------------Overlay--------------- */
+
+        .pure-material-button-contained::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgb(var(--pure-material-onprimary-rgb, 255, 255, 255));
+        opacity: 0;
+        transition: opacity 0.2s;
+        }
+
+        /* Ripple */
+        .pure-material-button-contained::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        border-radius: 50%;
+        padding: 50%;
+        width: 32px; /* Safari */
+        height: 32px; /* Safari */
+        background-color: rgb(var(--pure-material-onprimary-rgb, 255, 255, 255));
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1);
+        transition: opacity 1s, transform 0.5s;
+        }
+
+        /* Hover, Focus */
+        .pure-material-button-contained:hover,
+        .pure-material-button-contained:focus {
+        box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
+        }
+
+        .pure-material-button-contained:hover::before {
+        opacity: 0.08;
+        }
+
+        .pure-material-button-contained:focus::before {
+        opacity: 0.24;
+        }
+
+        .pure-material-button-contained:hover:focus::before {
+        opacity: 0.3;
+        }
+
+        /* Active */
+        .pure-material-button-contained:active {
+        box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+        }
+
+        .pure-material-button-contained:active::after {
+        opacity: 0.32;
+        transform: translate(-50%, -50%) scale(0);
+        transition: transform 0s;
+        }
+
+        /* Disabled */
+        .pure-material-button-contained:disabled {
+        color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.38);
+        background-color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.12);
+        box-shadow: none;
+        cursor: initial;
+        }
+
+        .pure-material-button-contained:disabled::before {
+        opacity: 0;
+        }
+
+        .pure-material-button-contained:disabled::after {
+        opacity: 0;
+        }
+
+        #dialogbox > div{ 
+        background:#FFF; 
+        margin:8px; 
+        }
+
+        #dialogbox > div > #dialogboxhead{ 
+        background: rgb(0, 77, 70); 
+        font-size:19px; 
+        padding:10px; 
+        color:rgb(255, 255, 255); 
+        font-family: Verdana, Geneva, Tahoma, sans-serif ;
+        }
+
+        #dialogbox > div > #dialogboxbody{ 
+        background:rgb(0, 47, 43); 
+        padding:20px; 
+        color:#FFF; 
+        font-family: Verdana, Geneva, Tahoma, sans-serif ;
+        }
+
+        #dialogbox > div > #dialogboxfoot{ 
+        background: rgb(0, 47, 43); 
+        padding:10px; 
+        text-align:center;  
+        }
+        /*#endregion Alert*/
+
+
+</style>
+
+<body style="background-size:cover; z-index:1; background-image: url('https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80')">
+    
+    <div style="margin-top:20px; width: 650px; z-index:3; position:center" class="container card w3-section">
+
+        <span><b>Address: </b><font id="account" size=2></font></span>
+        <span><b>Username: </b><font id="username" size=2><%=currentUser.username%></font></span>      
+
+        <hr>
+    
+        <center style="margin-bottom:10px;">
+            <button class="w3-button w3-green" style="width:150px;" onclick="uploadTenders();">Upload Tender</button>
+            <button class="w3-button w3-blue" style="width:150px;" onclick="showTenders();">My Tenders</button>
+            <script>console.log("test");</script>
+            <button class="w3-button w3-red" style="width:150px;" onclick="showAllBids();">Show all Bids</button><br>
+            <font size=1 color="blue" style="cursor: pointer;" onclick="location.href='/logout'">Not you? Logout here.</font>
+        </center>
+
+    </div>  
+   
+    <div id="uploadTender" style="margin-top:20px; width: 450px; display: none" class="container card"> 
+
+        <center style="margin-top:-15px;">
+        
+            <div class="w3-section">
+
+                <form onSubmit="App.submitTender(); return false">
+                    <br>
+                    <span><b>Tender Name</b><input class="form-control" id="itemName"></span><br>
+
+                    <span><b>Tender Description</b><textarea class="form-control" id="itemDesc" ></textarea></span><br>
+
+                    <span><b>Length of road to be Constructed (km) </b><input class="form-control" type="number" id="itemQuantity"></span><br>
+
+                    <span><b>Starting point - Ending point</b><input class="form-control" type="landmark" id="area" placeholder="starting point - ending point" ></span><br>
+
+                    <span><b>Last date of Bidding</b><input class="form-control" type="date" id="deadline" placeholder="Last Date for Bidding" required="required"></span><br>
+
+
+
+                    <span id="content">
+                        <input class="w3-button w3-green" style="width:150px;" type="submit" value="Upload a Tender"><br>
+                    </span>
+                </form>
+
+            </div>
+
+            <div id="loading" style="display:none; margin-bottom:5px; margin-top:-30px">
+                
+            </div>
+
+        </center>
+        
+    </div>
+
+    <div id="tenderList" style="margin-top:20px; display:none" class="container card">
+
+        <table id="mytenders" class="table table-hover">
+            <center>
+                <h6><b>My Tenders</b></h6>
+            </center>
+            <hr style="margin-top: -5px; margin-bottom: -1px;">
+            <tr style="text-align:center">
+                <td>Id</td>
+                <td>Tender name</td>
+                <td>Tender Description</td>
+                <td>Length of Road to be Constructed (km)</td>
+                <td>Starting point - Ending point</td>
+                <td>Last Date of Bidding</td>
+            </tr>
+        </table>
+
+    </div>
+    <br>
+
+    <div id="listAllBids" style="margin-top:20px; display:none" class="container card">
+
+        <table id="bidList" class="table table-hover">
+            <center>
+                <h6><b>All Bids</b></h6>
+            </center>
+            <hr style="margin-top: -5px; margin-bottom: -1px;">
+            <tr style="text-align:center">
+                <td>Id</td>
+                <td>Tender name</td>
+                <td>Bid by bidder</td>
+                <td>Length of road set by uploader (km) </td>
+                <td>Tender Description</td>
+                <td>Bidder public address</td>
+                <td>Starting point - Ending point</td>
+                <td>Accept contracts</td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript" language="javascript" src="truffle-contract.js"></script>
+<script language="javascript" type="text/javascript" src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.34/dist/web3.js"></script>
+<script type="text/javascript" language="javascript" src="loadEthereum.js"></script>
+<script type="text/javascript" language="javascript" src="uploaderDashboard.js"></script>
+<script type="text/javascript" language="javascript" src="alertbox.js"></script>
+
+</html>
