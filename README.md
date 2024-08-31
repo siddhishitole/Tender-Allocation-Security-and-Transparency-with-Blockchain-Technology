@@ -1,4 +1,4 @@
-# AnotherTender
+# Tender Allocation using Blockchain 
 
 ## Final Year CSE Project for SPPU,Pune
 Sponsored by **[IncuGlobe Solutions Pvt. Ltd.](http://www.incuglobe.com)**
