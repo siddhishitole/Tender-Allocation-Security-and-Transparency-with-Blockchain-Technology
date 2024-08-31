@@ -1,6 +1,6 @@
 # AnotherTender
 
-## Final Year CSE Project for SPPU, in PVG's COET, Pune
+## Final Year CSE Project for SPPU,Pune
 Sponsored by **[IncuGlobe Solutions Pvt. Ltd.](http://www.incuglobe.com)**
 
 
