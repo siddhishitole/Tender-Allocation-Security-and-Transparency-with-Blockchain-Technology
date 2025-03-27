@@ -65,16 +65,4 @@ Sponsored by **[IncuGlobe Solutions Pvt. Ltd.](http://www.incuglobe.com)**
   
   15. Your App is up and running. 
   
-  
-##
 
-Project Contributors
-
-
-[Aniket Datar](https://github.com/D4T4R) - Blockchain Backend
-
-[Atharv Vaspate](https://github.com/Atharv73) - Backend
-
-[Shankar Avad](https://github.com/Shankar247) - Frontend
-  
-[Niranjan Patankar](https://github.com/nira07) - Frontend and Design
